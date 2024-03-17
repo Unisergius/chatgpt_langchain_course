@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 # Assistant message (in LangChain its AI) - reply message going from the llm to the user
 
 # Everytime we chat with the LLM, we will sending the whole history of the conversation to it
-dotenv_path = join(dirname(__file__), '../.env')
+dotenv_path = join(dirname(__file__), '..', '.env')
 load_dotenv(dotenv_path)
 
 

@@ -5,13 +5,25 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain, SequentialChain
 import argparse
 
-dotenv_path = join(dirname(__file__), '../.env')
+dotenv_path = join(dirname(__file__), '..', '.env')
+print(dotenv_path)
 load_dotenv(dotenv_path)
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("--task", default="return a list of numbers", type=str, help="The task you want to perform")
-parser.add_argument("--language", default="python", type=str, help="The language you want to use")
+parser.add_argument(
+    "--task", 
+    default="return a list of numbers", 
+    type=str, 
+    help="The task you want to perform"
+)
+parser.add_argument(
+    "--language", 
+    default="python", 
+    type=str, 
+    help="The language you want to use"
+)
+
 args = parser.parse_args()
 
 #OPENAI procura por uma chave de API no arquivo .env automaticamente
@@ -40,7 +52,10 @@ test_chain = LLMChain(
 )
 
 chain = SequentialChain(
-    chains=[code_chain, test_chain],
+    chains=[
+        code_chain, 
+        test_chain
+    ],
     input_variables=["language", "task"],
     output_variables=["code", "test"]
 )
@@ -55,4 +70,5 @@ print("---------CODE---------")
 print(result["code"])
 
 print("---------TEST---------")
+
 print(result["test"])
